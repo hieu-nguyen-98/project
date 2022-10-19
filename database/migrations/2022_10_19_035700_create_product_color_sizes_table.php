@@ -19,7 +19,7 @@ class CreateProductColorSizesTable extends Migration
             $table->integer('color_id');
             $table->integer('quantity');
             $table->decimal('price_two',10,2)->nullable();
-            $table->deciaml('discount',10,2)->nullable();
+            $table->decimal('discount',10,2)->nullable();
             $table->integer('status')->default(1);
             $table->timestamps();
         });
