@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend\SettingController;
+use App\Http\Controllers\Backend\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware(['auth','admin'])->group(function(){
+    Route::get('setting', [SettingController::class,'index'])->name('setting.index');
+    Route::put('setting-update/{id}', [SettingController::class,'update'])->name('setting.update');
+
+    Route::resource('category', CategoryController::class);
+});
