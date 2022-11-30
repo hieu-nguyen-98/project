@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\Enums\UserRole;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -28,28 +29,24 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+    protected function authenticated()
+    {
+        if(Auth::user()->role == UserRole::SUPPER_ADMIN || Auth::user()->role == UserRole::ADMIN)
+        {
+            return redirect(route('dashboard'));
+        }
+        return redirect('/');
+    }
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function handleLogin()
-    {
-        if (Auth::user()->role == 'admin') {
-            return redirect(route('home'));
-        }
-        else
-        {
-            return view('welcome');
-        }
-    }
-
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
     }
-
     
 }

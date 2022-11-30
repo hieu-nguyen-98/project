@@ -1,3 +1,6 @@
+@php
+use App\Models\Category;
+@endphp
 @extends('backend.layouts.master')
 @section('content')
 	<main>
@@ -9,7 +12,7 @@
 			</ol>
 			<div class="card mb-4">
 				<div class="card-body">
-					<a href="{{route('category.create')}}" class="btn btn-warning float-end">Create A Category</a>
+					<a href="{{route('category.create')}}" class="btn btn-warning float-end">Create Category</a>
 				</div>
 			</div>
 			@include('sweetalert::alert')
@@ -25,6 +28,7 @@
 								<th>Loop</th>
 								<th>Title</th>
 								<th>Image</th>
+								<th>Parent Category</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -37,6 +41,14 @@
 									<img src="{{asset('assets/uploads/categories/'.$item->image)}}" width="60" height="60">
 								</td>
 								<td>
+									@if($item->parent_id)
+										{{ ucfirst($item->parent->name) }}
+									@else
+										<p>None</p>
+									@endif
+								</td>
+								<td>
+									<a href="{{route('category.show', $item->id)}}" title="view" class="btn btn-sm btn-outline-secondary "><i class="fas fa-eye"></i></a>
 									<a href=" {{route('category.edit', $item->id)}} " class=" float-left btn btn-sm btn-outline-warning"><i class="fas fa-edit"></i></a>
 									<form class="btn-delete" action="{{ route('category.destroy', $item->id) }} " method="post" >
 										@csrf

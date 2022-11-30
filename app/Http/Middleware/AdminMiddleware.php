@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Enums\UserRole;
 
 class AdminMiddleware
 {
@@ -18,11 +19,11 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
-            if(Auth::user()->role == 'admin')
+            if(Auth::user()->role == UserRole::SUPPER_ADMIN || Auth::user()->role == UserRole::ADMIN)
             {
                 return $next($request);
             }else{
-                return redirect(route('/'));
+                return redirect(route('home'));
             }
         }
         return abort(404);

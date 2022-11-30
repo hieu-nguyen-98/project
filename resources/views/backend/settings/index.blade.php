@@ -4,7 +4,7 @@
 		<div class="container-fluid px-4">
 			<h1 class="mt-4">Settings</h1>
 			<ol class="breadcrumb mb-4">
-				<li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
+				<li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
 				<li class="breadcrumb-item active">Settings</li>
 			</ol>
 			<div class="card mb-4">
@@ -66,7 +66,7 @@
 							<input type="text" class="form-control" name="youtube" value=" {{$setting->youtube}} ">
 						</div>
 						<div class="form-group mt-4">
-							<button class="btn btn-primary" type="submit" id="liveToastBtn" >Update Setting</button>
+							<button class="btn btn-primary" type="submit" >Update Setting</button>
 						</div>
 					</form>
 				</div>

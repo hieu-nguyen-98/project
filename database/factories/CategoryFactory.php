@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Category;
+use Illuminate\Support\Facades\Log;
 
 class CategoryFactory extends Factory
 {
@@ -16,9 +17,9 @@ class CategoryFactory extends Factory
 
     public function definition()
     {
+
         return [
             'name'=>$this->faker->word,
-
             'image'=>$this->faker->imageUrl(100, 100),
             'parent_id'=>$this->faker->randomElement(Category::pluck('id')->toArray()),
         ];
